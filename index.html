@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0e2a47">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Capacity Check">
+<link rel="manifest" href="manifest.webmanifest">
+<title>EMS Capacity & Refusal Checklist</title>
+<style>
+:root{--navy:#0e2a47;--red:#b51f2e;--green:#147a52;--bg:#f5f7fa;--line:#d8e0e7;--muted:#5e6b76}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:#17212b}
+header{position:sticky;top:0;z-index:5;background:var(--navy);color:#fff;padding:calc(16px + env(safe-area-inset-top)) 16px 16px;box-shadow:0 2px 8px #0002}
+header h1{margin:0;font-size:21px}header p{margin:4px 0 0;color:#d6e2ec;font-size:12px}
+main{max-width:760px;margin:auto;padding:14px 12px calc(100px + env(safe-area-inset-bottom))}
+.card,.q{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;margin-bottom:13px}
+h2{margin:0 0 11px;color:var(--navy);font-size:18px}h3{margin:0 0 8px;font-size:16px}
+.note{background:#eef4fa;border-left:4px solid var(--navy);padding:10px;border-radius:8px;font-size:14px}
+.row{display:flex;gap:9px;align-items:flex-start;margin:10px 0}.row input{width:22px;height:22px;accent-color:var(--navy)}
+label{font-size:15px;line-height:1.35}.prompt{background:#eef3f7;border-radius:10px;padding:10px;margin:10px 0;font-size:14px}
+ul{margin:7px 0;padding-left:20px}li{margin:5px 0}
+textarea,input[type=text],input[type=time]{width:100%;font-size:16px;padding:10px;border:1px solid #bec9d2;border-radius:10px;background:#fff}
+textarea{min-height:88px;resize:vertical}.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.seg input{display:none}.seg label{text-align:center;border:2px solid var(--line);padding:10px 6px;border-radius:10px;font-weight:700}
+.seg input[value=yes]:checked+label{border-color:var(--green);background:#eaf7f1;color:var(--green)}
+.seg input[value=no]:checked+label{border-color:var(--red);background:#fff0f2;color:var(--red)}
+.small{font-size:12px;color:var(--muted)}details{border-top:1px solid var(--line);margin-top:10px;padding-top:9px}summary{font-weight:700;color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btns{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+button{border:0;border-radius:10px;padding:12px;font-size:15px;font-weight:700}.primary{background:var(--navy);color:white}.secondary{background:#e8edf2}.danger{background:#fff0f2;color:var(--red);border:1px solid #f2c8ce}
+.status{position:sticky;bottom:8px;z-index:4;border-radius:13px;padding:12px;font-weight:700;box-shadow:0 5px 20px #0003;border:1px solid var(--line)}
+.incomplete{background:#fff7e6;color:#744d00}.pass{background:#eaf7f1;color:#0e6644}.fail{background:#fff0f2;color:#961725}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:0 12px 16px}@media(max-width:520px){.grid2,.btns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>EMS Capacity & Refusal Checklist</h1><p>COG 3.3 (East) · Appendix K</p></header>
+<main>
+<section class="card">
+<h2>Start Here</h2>
+<div class="note"><b>Use teach-back:</b> have the patient explain each item in their own words.</div>
+<div class="row"><input id="ao" type="checkbox"><label for="ao"><b>Alert and oriented</b> to time, place, self, and situation.</label></div>
+<div class="row"><input id="adult" type="checkbox"><label for="adult"><b>18+ or emancipated minor.</b></label></div>
+<div class="row"><input id="competent" type="checkbox"><label for="competent"><b>Not declared legally incompetent.</b></label></div>
+<div class="row"><input id="safe" type="checkbox"><label for="safe"><b>Not suicidal or homicidal.</b></label></div>
+</section>
+
+<section class="card"><h2>Capacity Checklist</h2>
+<div class="q"><h3>1. Nature of illness / injury</h3><div class="prompt"><b>Ask:</b><ul><li>“Tell me what happened today that caused 911 to be called.”</li><li>“What do you think is going on with you right now?”</li><li>“What concerns did we tell you we have?”</li></ul></div><textarea id="t1" placeholder="Patient's own words"></textarea><div class="seg"><input type="radio" name="q1" id="q1y" value="yes"><label for="q1y">YES</label><input type="radio" name="q1" id="q1n" value="no"><label for="q1n">NO</label></div></div>
+
+<div class="q"><h3>2. Risks of refusal</h3><div class="prompt"><b>Ask:</b><ul><li>“What could happen if you stay here instead of going with us?”</li><li>“What is the worst thing that could happen if this gets worse?”</li><li>“Explain back to me the risks we discussed.”</li></ul></div><textarea id="t2" placeholder="Patient's own words"></textarea><div class="seg"><input type="radio" name="q2" id="q2y" value="yes"><label for="q2y">YES</label><input type="radio" name="q2" id="q2n" value="no"><label for="q2n">NO</label></div></div>
+
+<div class="q"><h3>3. Alternatives</h3><div class="prompt"><b>Ask:</b><ul><li>“What other options do you have?”</li><li>“What is your plan to get medical care if you do not go by ambulance?”</li><li>“What will you do if your symptoms return or worsen?”</li></ul></div><textarea id="t3" placeholder="Patient's own words"></textarea><div class="seg"><input type="radio" name="q3" id="q3y" value="yes"><label for="q3y">YES</label><input type="radio" name="q3" id="q3n" value="no"><label for="q3n">NO</label></div></div>
+
+<div class="q"><h3>4. Rationale for refusal</h3><div class="prompt"><b>Ask:</b><ul><li>“Why do you not want to go to the hospital?”</li><li>“Knowing the risks we discussed, why are you still choosing to refuse?”</li><li>“What would make you change your mind and go?”</li></ul></div><textarea id="t4" placeholder="Patient's own words"></textarea><div class="seg"><input type="radio" name="q4" id="q4y" value="yes"><label for="q4y">YES</label><input type="radio" name="q4" id="q4n" value="no"><label for="q4n">NO</label></div></div>
+</section>
+
+<section class="card">
+<h2>Refusal Completion</h2>
+<div class="row"><input id="lim" type="checkbox"><label for="lim">Explained limitations of the prehospital evaluation.</label></div>
+<div class="row"><input id="bar" type="checkbox"><label for="bar">Identified barriers and tried to address them.</label></div>
+<div class="row"><input id="rb" type="checkbox"><label for="rb">Explained patient-specific risks and benefits.</label></div>
+<div class="row"><input id="fu" type="checkbox"><label for="fu">Advised follow-up and to call 911 again if symptoms change or worsen.</label></div>
+<div class="row"><input id="vitals" type="checkbox"><label for="vitals">Two sets of vitals at least 5 minutes apart, if permitted.</label></div>
+<div class="row"><input id="approval" type="checkbox"><label for="approval"><b>ODS / medical direction approval obtained before refusal signature.</b></label></div>
+<div class="grid2"><div><label for="by"><b>Approved by</b></label><input id="by" type="text"></div><div><label for="at"><b>Time</b></label><input id="at" type="time"></div></div>
+<div class="row"><input id="sig" type="checkbox"><label for="sig">Patient refusal/AMA signature obtained.</label></div>
+<div class="row"><input id="wit" type="checkbox"><label for="wit">Third-party witness obtained/documented.</label></div>
+<label for="bt"><b>Barrier(s) / how addressed:</b></label><textarea id="bt"></textarea>
+</section>
+
+<section class="card">
+<h2>Narrative Builder</h2>
+<button id="build" class="primary" type="button">Build Capacity Narrative</button>
+<textarea id="out" style="min-height:230px;margin-top:10px"></textarea>
+<div class="btns"><button id="copy" class="secondary" type="button">Copy Narrative</button><button id="reset" class="danger" type="button">Reset Form</button></div>
+</section>
+
+<section class="card"><h2>Privacy</h2><p class="small"><b>No form data is transmitted or intentionally saved.</b> Use the approved PCR as the legal medical record.</p></section>
+<div id="status" class="status incomplete">Capacity checklist incomplete.</div>
+</main>
+<footer>Field reference only · Verify the current COG and follow agency policy / medical direction.</footer>
+<script>
+const qs=["q1","q2","q3","q4"];
+const radio=n=>document.querySelector('input[name="'+n+'"]:checked')?.value||null;
+const ck=id=>document.getElementById(id).checked;
+const txt=id=>document.getElementById(id).value.trim();
+function update(){const s=document.getElementById("status"),v=qs.map(radio),pre=["ao","adult","competent","safe"].every(ck);if(v.includes("no")){s.className="status fail";s.textContent="STOP: At least one NO — capacity not demonstrated. Follow implied-consent/medical-direction requirements."}else if(v.every(x=>x==="yes")&&pre){s.className="status pass";s.textContent="All 4 capacity elements demonstrated. Complete the refusal workflow and obtain required approval before signatures."}else{s.className="status incomplete";s.textContent="Capacity checklist incomplete."}}
+document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(e=>e.addEventListener("change",update));
+const yn=v=>v==="yes"?"YES":v==="no"?"NO":"NOT DOCUMENTED";
+document.getElementById("build").onclick=()=>{const L=[];L.push("Decision-making capacity was assessed using the Capacity Checklist.");L.push("Alert/oriented x4: "+(ck("ao")?"YES":"NO/NOT CHECKED")+".");L.push("Adult/emancipated minor: "+(ck("adult")?"YES":"NO/NOT CHECKED")+".");L.push("Not legally incompetent: "+(ck("competent")?"YES":"NO/NOT CHECKED")+".");L.push("Not suicidal/homicidal: "+(ck("safe")?"YES":"NO/NOT CHECKED")+".","");L.push('1. Nature of illness/injury: '+yn(radio("q1"))+'. Patient stated: "'+(txt("t1")||"[response not entered]")+'"');L.push('2. Risks of refusal: '+yn(radio("q2"))+'. Patient stated: "'+(txt("t2")||"[response not entered]")+'"');L.push('3. Alternatives: '+yn(radio("q3"))+'. Patient stated: "'+(txt("t3")||"[response not entered]")+'"');L.push('4. Rationale for refusal: '+yn(radio("q4"))+'. Patient stated: "'+(txt("t4")||"[response not entered]")+'"',"");L.push("Prehospital limitations explained: "+(ck("lim")?"YES":"NO/NOT CHECKED")+".");L.push("Barriers addressed: "+(ck("bar")?"YES":"NO/NOT CHECKED")+". "+(txt("bt")?"Details: "+txt("bt"):""));L.push("Risks/benefits explained: "+(ck("rb")?"YES":"NO/NOT CHECKED")+".");L.push("Follow-up/911 return precautions: "+(ck("fu")?"YES":"NO/NOT CHECKED")+".");L.push("Two vitals sets 5 minutes apart, if permitted: "+(ck("vitals")?"YES":"NO/NOT CHECKED")+".");L.push("ODS/medical direction approval before signature: "+(ck("approval")?"YES":"NO/NOT CHECKED")+(txt("by")?", approved by "+txt("by"):"")+(txt("at")?" at "+txt("at"):"")+".");L.push("Patient signature: "+(ck("sig")?"OBTAINED":"NOT CHECKED")+". Witness: "+(ck("wit")?"OBTAINED/DOCUMENTED":"NOT CHECKED")+".");document.getElementById("out").value=L.join("\n");};
+document.getElementById("copy").onclick=async()=>{const o=document.getElementById("out");if(!o.value)return alert("Build the narrative first.");try{await navigator.clipboard.writeText(o.value);alert("Narrative copied.");}catch{o.focus();o.select();alert("Copy unavailable. Text selected for manual copy.");}};
+document.getElementById("reset").onclick=()=>{if(!confirm("Clear all entries?"))return;document.querySelectorAll("input").forEach(e=>{if(e.type==="checkbox"||e.type==="radio")e.checked=false;else e.value=""});document.querySelectorAll("textarea").forEach(e=>e.value="");update();};
+if("serviceWorker" in navigator){addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js").catch(()=>{}))}
+update();
+</script>
+</body>
+</html>

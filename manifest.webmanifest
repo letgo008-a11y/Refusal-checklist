@@ -1,0 +1,16 @@
+{
+  "name": "EMS Capacity & Refusal Checklist",
+  "short_name": "Capacity Check",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#0e2a47",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
